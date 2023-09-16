@@ -1,7 +1,7 @@
 class LinkedList {
   constructor(head = null) {
-    this.head = head;
-    this.tail = head;
+    this._head = head;
+    this._tail = head;
   }
 
   static goToNextNode(node) {
@@ -9,30 +9,38 @@ class LinkedList {
   }
 
   append(node) {
-    const doesTailExist = this.tail !== null;
+    const doesTailExist = this._tail !== null;
     if (doesTailExist) {
-      this.tail.nextNode = node;
+      this._tail.nextNode = node;
     }
-    this.tail = node;
+    this._tail = node;
   }
 
   prepend(node) {
-    const doesHeadExist = this.head !== null;
+    const doesHeadExist = this._head !== null;
     if (doesHeadExist) {
-      node.nextNode = this.head;
+      node.nextNode = this._head;
     }
-    this.head = node;
+    this._head = node;
   }
 
   size() {
     let count = 0;
-    let currentNode = this.head;
+    let currentNode = this._head;
 
     while (currentNode) {
       currentNode = LinkedList.goToNextNode(currentNode);
       count++;
     }
     return count;
+  }
+
+  get head() {
+    return this._head;
+  }
+
+  get tail() {
+    return this._tail;
   }
 }
 
@@ -46,4 +54,8 @@ class Node {
 const list = new LinkedList(new Node({ value: 10 }));
 list.append(new Node({ value: 20 }));
 list.prepend(new Node({ value: 0 }));
+
 console.log(list.size());
+
+console.log(list.head);
+console.log(list.tail);
