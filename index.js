@@ -1,4 +1,21 @@
-class LinkedList {}
+class LinkedList {
+  constructor(head = null) {
+    this.head = head;
+    this.tail = head;
+  }
+
+  static goToNextNode(node) {
+    return node.nextNode;
+  }
+
+  append(node) {
+    const doesTailExist = this.tail !== null;
+    if (doesTailExist) {
+      this.tail.nextNode = node;
+    }
+    this.tail = node;
+  }
+}
 
 class Node {
   constructor({ value = null, nextNode = null }) {
@@ -6,3 +23,6 @@ class Node {
     this.nextNode = nextNode;
   }
 }
+
+const list = new LinkedList(new Node({ value: 10 }));
+list.append(new Node({ value: 20 }));
