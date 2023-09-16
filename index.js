@@ -108,16 +108,39 @@ class LinkedList {
     if (index === 0) {
       this.prepend(newNode);
       return;
-    }
+    } else {
+      const lastNeededIndex = index - 1;
+      let currentNode = this._head;
 
-    const lastNeededIndex = index - 1;
-    let currentNode = this._head;
-
-    for (let i = 0; i < lastNeededIndex; i++) {
-      currentNode = currentNode.nextNode;
+      for (let i = 0; i < lastNeededIndex; i++) {
+        currentNode = currentNode.nextNode;
+      }
+      newNode.nextNode = currentNode.nextNode;
+      currentNode.nextNode = newNode;
     }
-    newNode.nextNode = currentNode.nextNode;
-    currentNode.nextNode = newNode;
+  }
+
+  removeAt(index) {
+    if (index < 0 || index > this.size() - 1) return;
+    let nodeToBeRemoved = this._head;
+
+    if (index === 0) {
+      let newHead = nodeToBeRemoved.nextNode;
+
+      this._head = newHead;
+      return;
+    } else {
+      const lastNeededIndex = index;
+      let previousNode = null;
+      let nextNode = nodeToBeRemoved.nextNode;
+
+      for (let i = 0; i < lastNeededIndex; i++) {
+        previousNode = nodeToBeRemoved;
+        nodeToBeRemoved = nextNode;
+        nextNode = nodeToBeRemoved.nextNode;
+      }
+      previousNode.nextNode = nextNode;
+    }
   }
 
   get head() {
@@ -134,6 +157,6 @@ list.append(new Node({ value: 20 }));
 list.prepend(new Node({ value: 0 }));
 list.prepend(new Node({ value: -10 }));
 list.prepend(new Node({ value: -20 }));
-list.insertAt({ value: 3, index: 0 });
 
+list.removeAt(0);
 console.log(list.toString());
