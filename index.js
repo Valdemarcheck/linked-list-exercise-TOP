@@ -79,6 +79,21 @@ class LinkedList {
     return null;
   }
 
+  toString() {
+    const EXTRA_SIGNS_LENGTH = 4;
+    let currentNode = this._head;
+    let stringRepresentation = "";
+
+    while (currentNode) {
+      stringRepresentation += `( ${currentNode.value} ) -> `;
+      currentNode = currentNode.nextNode;
+    }
+
+    const lastNeededSignIndex =
+      stringRepresentation.length - EXTRA_SIGNS_LENGTH;
+    return stringRepresentation.slice(0, lastNeededSignIndex);
+  }
+
   get head() {
     return this._head;
   }
@@ -98,5 +113,7 @@ class Node {
 const list = new LinkedList(new Node({ value: 10 }));
 list.append(new Node({ value: 20 }));
 list.prepend(new Node({ value: 0 }));
+list.prepend(new Node({ value: -10 }));
+list.prepend(new Node({ value: -20 }));
 
-console.log(list.at(0));
+console.log(list.toString());
