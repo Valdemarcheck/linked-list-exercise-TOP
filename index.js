@@ -4,7 +4,7 @@ class LinkedList {
     this._tail = head;
   }
 
-  static goToNextNode(node) {
+  #goToNextNode(node) {
     return node.nextNode;
   }
 
@@ -29,10 +29,19 @@ class LinkedList {
     let currentNode = this._head;
 
     while (currentNode) {
-      currentNode = LinkedList.goToNextNode(currentNode);
+      currentNode = this.#goToNextNode(currentNode);
       count++;
     }
     return count;
+  }
+
+  at(index) {
+    let currentNode = this._head;
+    for (let i = 0; i < index; i++) {
+      currentNode = this.#goToNextNode(currentNode);
+      if (!currentNode) return undefined;
+    }
+    return currentNode;
   }
 
   get head() {
@@ -59,3 +68,5 @@ console.log(list.size());
 
 console.log(list.head);
 console.log(list.tail);
+
+console.log(list.at(0));
