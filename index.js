@@ -4,10 +4,6 @@ class LinkedList {
     this._tail = head;
   }
 
-  #goToNextNode(node) {
-    return node.nextNode;
-  }
-
   append(node) {
     const doesTailExist = this._tail !== null;
     if (doesTailExist) {
@@ -29,7 +25,7 @@ class LinkedList {
     let currentNode = this._head;
 
     while (currentNode) {
-      currentNode = this.#goToNextNode(currentNode);
+      currentNode = currentNode.nextNode;
       count++;
     }
     return count;
@@ -38,10 +34,23 @@ class LinkedList {
   at(index) {
     let currentNode = this._head;
     for (let i = 0; i < index; i++) {
-      currentNode = this.#goToNextNode(currentNode);
-      if (!currentNode) return undefined;
+      currentNode = currentNode.nextNode;
+
+      if (!currentNode) {
+        return undefined;
+      }
     }
     return currentNode;
+  }
+
+  pop() {
+    let lastToSecondNodeIndex = this.size() - 2;
+
+    if (lastToSecondNodeIndex >= 0) {
+      const lastToSecondNode = this.at(lastToSecondNodeIndex);
+      lastToSecondNode.nextNode = null;
+      this._tail = lastToSecondNodeIndex;
+    }
   }
 
   get head() {
@@ -66,7 +75,9 @@ list.prepend(new Node({ value: 0 }));
 
 console.log(list.size());
 
-console.log(list.head);
-console.log(list.tail);
+// console.log(list.head);
+// console.log(list.tail);
 
+console.log(list.at(0));
+list.pop();
 console.log(list.at(0));
