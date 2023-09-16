@@ -23,6 +23,17 @@ class LinkedList {
     }
     this.head = node;
   }
+
+  size() {
+    let count = 0;
+    let currentNode = this.head;
+
+    while (currentNode) {
+      currentNode = LinkedList.goToNextNode(currentNode);
+      count++;
+    }
+    return count;
+  }
 }
 
 class Node {
@@ -35,3 +46,4 @@ class Node {
 const list = new LinkedList(new Node({ value: 10 }));
 list.append(new Node({ value: 20 }));
 list.prepend(new Node({ value: 0 }));
+console.log(list.size());
