@@ -1,3 +1,10 @@
+class Node {
+  constructor({ value = null, nextNode = null }) {
+    this.value = value;
+    this.nextNode = nextNode;
+  }
+}
+
 class LinkedList {
   constructor(head = null) {
     this._head = head;
@@ -94,6 +101,25 @@ class LinkedList {
     return stringRepresentation.slice(0, lastNeededSignIndex);
   }
 
+  insertAt({ value, index }) {
+    if (index < 0 || index > this.size() - 1) return;
+    const newNode = new Node({ value: value });
+
+    if (index === 0) {
+      this.prepend(newNode);
+      return;
+    }
+
+    const lastNeededIndex = index - 1;
+    let currentNode = this._head;
+
+    for (let i = 0; i < lastNeededIndex; i++) {
+      currentNode = currentNode.nextNode;
+    }
+    newNode.nextNode = currentNode.nextNode;
+    currentNode.nextNode = newNode;
+  }
+
   get head() {
     return this._head;
   }
@@ -103,17 +129,11 @@ class LinkedList {
   }
 }
 
-class Node {
-  constructor({ value = null, nextNode = null }) {
-    this.value = value;
-    this.nextNode = nextNode;
-  }
-}
-
 const list = new LinkedList(new Node({ value: 10 }));
 list.append(new Node({ value: 20 }));
 list.prepend(new Node({ value: 0 }));
 list.prepend(new Node({ value: -10 }));
 list.prepend(new Node({ value: -20 }));
+list.insertAt({ value: 3, index: 0 });
 
 console.log(list.toString());
