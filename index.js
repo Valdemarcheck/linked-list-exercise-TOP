@@ -15,6 +15,14 @@ class LinkedList {
     }
     this.tail = node;
   }
+
+  prepend(node) {
+    const doesHeadExist = this.head !== null;
+    if (doesHeadExist) {
+      node.nextNode = this.head;
+    }
+    this.head = node;
+  }
 }
 
 class Node {
@@ -26,3 +34,4 @@ class Node {
 
 const list = new LinkedList(new Node({ value: 10 }));
 list.append(new Node({ value: 20 }));
+list.prepend(new Node({ value: 0 }));
