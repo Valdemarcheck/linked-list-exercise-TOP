@@ -65,6 +65,20 @@ class LinkedList {
     return false;
   }
 
+  find(value) {
+    let currentNode = this._head;
+    let i = 0;
+
+    while (currentNode) {
+      if (currentNode.value === value) {
+        return i;
+      }
+      currentNode = currentNode.nextNode;
+      i++;
+    }
+    return null;
+  }
+
   get head() {
     return this._head;
   }
