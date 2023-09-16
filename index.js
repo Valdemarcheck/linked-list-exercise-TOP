@@ -53,6 +53,18 @@ class LinkedList {
     }
   }
 
+  contains(value) {
+    let currentNode = this._head;
+
+    while (currentNode) {
+      if (currentNode.value === value) {
+        return true;
+      }
+      currentNode = currentNode.nextNode;
+    }
+    return false;
+  }
+
   get head() {
     return this._head;
   }
@@ -73,11 +85,4 @@ const list = new LinkedList(new Node({ value: 10 }));
 list.append(new Node({ value: 20 }));
 list.prepend(new Node({ value: 0 }));
 
-console.log(list.size());
-
-// console.log(list.head);
-// console.log(list.tail);
-
-console.log(list.at(0));
-list.pop();
 console.log(list.at(0));
