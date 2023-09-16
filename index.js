@@ -151,12 +151,3 @@ class LinkedList {
     return this._tail;
   }
 }
-
-const list = new LinkedList(new Node({ value: 10 }));
-list.append(new Node({ value: 20 }));
-list.prepend(new Node({ value: 0 }));
-list.prepend(new Node({ value: -10 }));
-list.prepend(new Node({ value: -20 }));
-
-list.removeAt(0);
-console.log(list.toString());
